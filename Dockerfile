@@ -1,4 +1,4 @@
-FROM node:16-alpine AS base
+FROM node:14-alpine AS base
 
 FROM base AS build
 WORKDIR /opt
@@ -12,7 +12,7 @@ WORKDIR /opt
 COPY package*.json ./
 RUN npm install --only=production
 
-FROM gcr.io/distroless/nodejs:16
+FROM gcr.io/distroless/nodejs:14
 WORKDIR /app
 COPY --from=build /opt/dist .
 COPY --from=dependencies /opt/node_modules node_modules

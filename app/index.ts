@@ -15,4 +15,8 @@ const app = express()
 
 app.use('/', proxy)
 
-app.listen(PORT)
+app.listen(PORT, () => {
+  process.on('SIGINT', async () => {
+    process.exit()
+  })
+})
